@@ -1,8 +1,12 @@
 import bs4
 import requests
 from NextPage import Habr
-from decorators import Logator
-import datetime
+from decorators import paralogator
+import pathlib
+
+def getpath():
+    path = pathlib.Path.cwd()
+    return path
 
 headers = {
     'sec-ch-ua': 'Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105',
@@ -21,7 +25,7 @@ KEYWORDS = ['дизайн', 'фото', 'web', 'python']
 base_url = 'https://habr.com'
 end_url = '/ru/all/'
 
-@Logator
+@paralogator(getpath())
 def getsoup(link):
     response = requests.get(link, headers=headers)
     text = response.text
